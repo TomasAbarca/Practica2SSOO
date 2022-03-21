@@ -12,8 +12,7 @@
 void read_file(char const *filename)
 {
     std::string linea;
-    FILE *file=NULL;
-    file=fopen(filename,"rt");
+    std::ifstream file(filename);
     while(getline(file, linea)){
         std::cout<<linea<<std::endl;
     }
