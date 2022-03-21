@@ -15,6 +15,7 @@ void read_file(char const *filename)
     std::ifstream file(filename);
     while(getline(file, linea)){
         std::cout<<linea<<std::endl;
+        
     }
 }
 
