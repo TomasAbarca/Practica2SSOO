@@ -8,13 +8,28 @@
 #include <thread>
 #include <fstream>
 
-int lines_count(char const *filename)
+int count_lines(char const *filename)
 {
     int counter;
     std::string line;
     std::ifstream file(filename);
-    while(getline(file,line)){
+    if (existFile(filename)){
+        while(getline(file,line)){
         counter++;
     }
+    }
     return counter;
+}
+
+
+//Método para comprobar si existe el archivo
+
+bool existFile(std::string path)
+{
+    std::ifstream file(path);
+    if(!file.is_open())
+    {
+        return false;
+    }
+    return true;
 }
