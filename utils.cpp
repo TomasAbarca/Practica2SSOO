@@ -8,6 +8,10 @@
 #include <thread>
 #include <fstream>
 
+int count_lines(char const *filename);
+bool existFile(char const *path);
+
+
 int count_lines(char const *filename)
 {
     int counter;
@@ -24,7 +28,7 @@ int count_lines(char const *filename)
 
 //Método para comprobar si existe el archivo
 
-bool existFile(std::string path)
+bool existFile(char const *path)
 {
     std::ifstream file(path);
     if(!file.is_open())
