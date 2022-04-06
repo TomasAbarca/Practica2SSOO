@@ -6,7 +6,7 @@ bool existFile(char const *path);
 
 int count_lines(char const *filename)
 {
-    int counter;
+    int counter=0;
     std::string line;
     std::ifstream file(filename);
     if (existFile(filename)){
