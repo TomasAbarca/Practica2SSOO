@@ -8,6 +8,7 @@
 #include <thread>
 #include <fstream>
 #include <vector>
+#include <sstream>  
 
 #define COLOR_RED     "\x1b[31m"
 #define COLOR_GREEN   "\x1b[32m"
@@ -16,3 +17,5 @@
 #define COLOR_MAGENTA "\x1b[35m"
 #define COLOR_CYAN    "\x1b[36m"
 #define COLOR_RESET   "\x1b[0m"
+
+#define NUMBER_CHAR_TO_ERASE 1
