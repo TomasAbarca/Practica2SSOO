@@ -1,7 +1,6 @@
 
 #include "utils.cpp"
 
-
 /*------------------------ Global Variables ----------------------------*/
 
 int Gtotal_lines, Gthreads, *Gn_threads;
@@ -60,19 +59,14 @@ void read_file(int line_min, int line_max, int id_thread)
     std::string line;
     std::ifstream file(Gfilename);
     std::vector<std::string> v_words;
-    /*std::cout<<"linea minima,"<<line_min<< " hilo: "<<id_thread<<std::endl;
-    std::cout<<"linea maximo, "<<line_max<< " hilo: "<<id_thread<<std::endl;*/
+
     if(existFile(Gfilename)){
         while(getline(file, line)){
             if(id_line>=line_min && id_line<=line_max){
                 line = toLowerCase_Delete_Simbols(line);
                 v_words = divideLine_InWords(line);
                 searchTheWord(id_line, id_thread, line_min, line_max, v_words);
-                /*if(id_thread==0){
-                    std::cout<<COLOR_RED<<line<<COLOR_RESET<<std::endl;
-                }else if(id_thread>0){
-                    std::cout<<COLOR_GREEN<<line<<COLOR_RESET<<std::endl;
-                }else;*/
+                
             }else;
             id_line++;
         }
