@@ -1,3 +1,8 @@
+/*  Aarón Peces García, Tomás Abarca Cerro, Fernando González García.
+
+    SSOOIIGLE.cpp: This .cpp is the main program 
+*/
+
 
 #include "utils.cpp"
 
@@ -12,8 +17,8 @@ std::mutex sem;
 
 /*------------------------ Process Management ----------------------------*/
 
-void read_file(int line_min, int line_max, int id_thread);
-void create_threads();
+void readFile(int line_min, int line_max, int id_thread);
+void createThreads();
 void searchTheWord(int id_line, int id_thread, int line_min, int line_max, std::vector<std::string> v_words);
 void showLinesResults();
 
@@ -23,18 +28,18 @@ int main(int argc, char const *argv[])
 {
     std::cout<<"\n"<<"Bienvenido al buscador "<<COLOR_BLUE<<"SS"<<COLOR_RED<<"O"<<COLOR_YELLOW<<"O"<<COLOR_BLUE<<"II"<<COLOR_GREEN<<"GL"<<COLOR_RED<<"E"<<COLOR_RESET<<"\n"<<std::endl;
     Gfilename=argv[1];
-    GwordToSearch=toLowerCase_Delete_Simbols(argv[2]);
+    GwordToSearch=toLowerCaseDeleteSimbols(argv[2]);
     Gn_threads=&Gthreads;
     *Gn_threads=std::atoi(argv[3]);
-    Gtotal_lines=count_lines(Gfilename);
+    Gtotal_lines=countLines(Gfilename);
     
-    create_threads();
+    createThreads();
     showLinesResults();
 }
 
 /*------------------------ Create Threads Function ----------------------------*/
 
-void create_threads()
+void createThreads()
 {
     int block_size = Gtotal_lines/Gthreads;
 
@@ -45,7 +50,7 @@ void create_threads()
             line_max=(Gtotal_lines-1);
         }else;
 
-        Gv_threads.push_back(std::thread(read_file, line_min, line_max, i));
+        Gv_threads.push_back(std::thread(readFile, line_min, line_max, i));
     }
 
     std::for_each(Gv_threads.begin(), Gv_threads.end(), std::mem_fn(&std::thread::join)); 
@@ -53,7 +58,7 @@ void create_threads()
 
 /*------------------------ Read Book Function ----------------------------*/
 
-void read_file(int line_min, int line_max, int id_thread)
+void readFile(int line_min, int line_max, int id_thread)
 {
     int id_line=0;
     std::string line;
@@ -63,16 +68,21 @@ void read_file(int line_min, int line_max, int id_thread)
     if(existFile(Gfilename)){
         while(getline(file, line)){
             if(id_line>=line_min && id_line<=line_max){
-                line = toLowerCase_Delete_Simbols(line);
-                v_words = divideLine_InWords(line);
+                line = toLowerCaseDeleteSimbols(line);
+                v_words = divideLineInWords(line);
                 searchTheWord(id_line, id_thread, line_min, line_max, v_words);
                 
             }else;
             id_line++;
         }
+    }else{
+        std::cout<<"Error opening the file..."<<std::endl;
+        exit(EXIT_FAILURE);
     }
     
 }
+
+/*------------------------ Search Word Function ----------------------------*/
 
 void searchTheWord(int id_line, int id_thread, int line_min, int line_max, std::vector<std::string> v_words){
 
@@ -99,6 +109,8 @@ void searchTheWord(int id_line, int id_thread, int line_min, int line_max, std::
         }
     }
 }
+
+/*------------------------ Show Results Function ----------------------------*/
 
 void showLinesResults()
 {

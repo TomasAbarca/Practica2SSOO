@@ -1,13 +1,21 @@
-#include "lib.h"
-#include "LineResult.h"
+/*  Aarón Peces García, Tomás Abarca Cerro, Fernando González García.
 
-int count_lines(char const *filename);
+    utils.cpp: This .cpp store some functions that we use in the main program
+*/
+
+
+#include "../include/lib.h"
+#include "../include/LineResult.h"
+
+int countLines(char const *filename);
 bool existFile(char const *path);
-std::string toLowerCase_Delete_Simbols(std::string wordToSearch);
-std::vector<std::string> divideLine_InWords(std::string line);
+std::string toLowerCaseDeleteSimbols(std::string wordToSearch);
+std::vector<std::string> divideLineInWords(std::string line);
 
 
-int count_lines(char const *filename)
+/*------------------------ Count Lines Function ----------------------------*/
+
+int countLines(char const *filename)
 {
     int counter=0;
     std::string line;
@@ -21,7 +29,7 @@ int count_lines(char const *filename)
 }
 
 
-//Método para comprobar si existe el archivo
+/*------------------------ Check the Existence of the file Function ----------------------------*/
 
 bool existFile(char const *path)
 {
@@ -33,7 +41,7 @@ bool existFile(char const *path)
     return true;
 }
 
-std::string toLowerCase_Delete_Simbols(std::string wordToSearch){
+std::string toLowerCaseDeleteSimbols(std::string wordToSearch){
 
     unsigned i;
 
@@ -50,7 +58,9 @@ std::string toLowerCase_Delete_Simbols(std::string wordToSearch){
     return wordToSearch;
 }
 
-std::vector<std::string> divideLine_InWords(std::string line){
+/*------------------------ Divide One Line In Words Function ----------------------------*/
+
+std::vector<std::string> divideLineInWords(std::string line){
     std::vector<std::string> v_words;
     std::istringstream stream (line, std::istringstream::in);
     std::string token;

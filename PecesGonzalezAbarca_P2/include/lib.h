@@ -1,3 +1,9 @@
+/*  Aarón Peces García, Tomás Abarca Cerro, Fernando González García.
+
+    lib.h: This header file that we use to include all the libraries we need, and
+    define some variables such a colour codes for the standard output.
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/types.h>

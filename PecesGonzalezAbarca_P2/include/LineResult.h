@@ -1,3 +1,7 @@
+/*  Aarón Peces García, Tomás Abarca Cerro, Fernando González García.
+
+    LineResult.h: This header file that we have defined to create an objects when the program obteains a result 
+*/
 
 #include "lib.h"
 
@@ -5,7 +9,7 @@
 #define LineResult_h
 
 using namespace std;
-/*Clase LineResult: Esta clase incluye el objeto LineResult, este objeto es la linea donde se encuentra la word que el usuario ha introducido*/
+
 class LineResult{
 private:
     int id_thread;
@@ -26,8 +30,7 @@ public:
     }
     void showResult(int);
 };
-/*Constructor del objeto LineResult, cada objeto tiene su numero de hilo, la linea inicial y final que cada hilo lee,
- el numero de linea donde se ha encontrado la palabra, la palabra anterior a la palabra elegida, la palabra elegida y la palabra posterior*/
+
 LineResult::LineResult(int _id_thread,int _first_line, int _last_line,int _n_line,string _prev_word, string _word, string _post_word){
     id_thread=_id_thread;
     first_line=_first_line;
@@ -37,7 +40,7 @@ LineResult::LineResult(int _id_thread,int _first_line, int _last_line,int _n_lin
     word=_word;
     post_word=_post_word;
 }
-/*LineResult::showResult(): Este metodo muestra un objeto LineResult por pantalla segun el formato de salida establecido*/
+
 void LineResult::showResult(int _color){
     color=_color;
     switch (color)
