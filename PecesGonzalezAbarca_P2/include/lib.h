@@ -15,6 +15,9 @@
 #include <fstream>
 #include <vector>
 #include <sstream>  
+#include <mutex>
+#include <algorithm>
+#include <functional>
 
 #define COLOR_RED     "\x1b[31m"
 #define COLOR_GREEN   "\x1b[32m"
