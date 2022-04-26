@@ -1,12 +1,13 @@
 #include <iostream>
+#pragma once
 
 class Client{
     private:
         int id;
         std::string word_to_search;
-        std::string category;
+        int category;
     public:
-        Client(int id, std::string word_to_search, std::string category);
+        Client(int id, std::string word_to_search, int category);
         int operator()(int n);
         void toString();
 };

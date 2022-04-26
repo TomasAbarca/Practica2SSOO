@@ -1,20 +1,17 @@
-#include <iostream>
-#include <stdlib.h>
-#include <time.h>
-#include <vector>
-#include <thread>
-
-#include "client.cpp"
+#include "Client.cpp"
+#include "Client_PremiumLimit.cpp"
+#include "utils.cpp"
 
 #define NUM_CLIENTS 6
 
 std::vector<Client> g_clients;
-std::vector<std::string> g_dictionary = {"hola", "adios", "perro", "gato", "dia", "mes", "hora"};
+std::vector<std::string> g_dictionary;
 
 void createClients();
 void createClientThread();
 
 int main(){ 
+    g_dictionary=readDiccionary();
     std::thread clients(createClients);
     clients.join();
     std::thread clients_threads(createClientThread);
@@ -23,28 +20,28 @@ int main(){
 
 void createClients(){
     int i, account_type, word_to_search;
-    std::string category;
+    int category, credits=100;
     srand(time(NULL));
 
     for(i=0; i<NUM_CLIENTS; i++){
-        account_type = rand() % 3;
+        account_type = rand() % 3; //Cambiar a 10 numeros para incluir la probabilidad del 80-20%
         word_to_search = rand() % (g_dictionary.size() - 1);
 
         switch(account_type){
             case 0:{
-                category = "Free account";
+                category = 1;
                 Client c (i, g_dictionary[word_to_search], category);
                 g_clients.push_back(c);
                 break;
             }
             case 1:{
-                category = "Premium limit account";
-                Client c (i, g_dictionary[word_to_search], category);
-                g_clients.push_back(c);
+                category = 2;
+                Client_PremiumLimit cpl(i, g_dictionary[word_to_search], category, credits);
+                g_clients.push_back(cpl);
                 break;
             }
             case 2:{
-                category = "Premium limitless account";
+                category = 3;
                 Client c (i, g_dictionary[word_to_search], category);
                 g_clients.push_back(c);
                 break;
