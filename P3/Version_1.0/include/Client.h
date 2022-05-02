@@ -6,12 +6,14 @@ class Client{
         int id;
         std::string word_to_search;
         int category;
-        int priority;
     public:
-        Client(int id, std::string word_to_search, int category, int priority);
-        int get_priority();
-        //int operator()(int n);
+        Client(int id, std::string word_to_search, int category);
+        int get_id();
+        int get_category();
+        std::string get_word();
+
         void toString();
+        
 
 };
 

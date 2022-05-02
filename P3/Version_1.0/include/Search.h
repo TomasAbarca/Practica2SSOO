@@ -8,7 +8,7 @@ class Search {
         std::queue <Client> q_clients;
     public:
         Search(std::queue<Client> q_clients);
-        int operator()();
+        int operator()(int i);
         void toString();
 
 };
