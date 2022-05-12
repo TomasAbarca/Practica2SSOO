@@ -71,6 +71,8 @@
         "iterator": "cpp",
         "utility": "cpp",
         "queue": "cpp",
-        "filesystem": "cpp"
+        "filesystem": "cpp",
+        "condition_variable": "cpp",
+        "future": "cpp"
     }
 }
