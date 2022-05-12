@@ -75,23 +75,24 @@ int main(){
 
 void createClients(){
     std::string category;
-    int i, random_category, random_word;
+    int i, random_category, random_word, random_limit;
     srand(time(NULL));
 
     for(i=0; i < CLIENTS; i++){
         random_category = rand() % 3;
         random_word = rand() % (g_dictionary.size() - 1);
+        random_limit = rand() % (LIMIT - 1);
 
         switch (random_category){
             case 0:{
                 category = "Free Account";
-                Client c (i, category, g_dictionary[random_word], LIMIT_WORDS);
+                Client c (i, category, g_dictionary[random_word], random_limit);
                 g_clients.push_back(c);
                 break;
             }
             case 1:{
                 category = "Premium Limit";
-                Client c (i, category, CREDITS, g_dictionary[random_word]);
+                Client c (i, category, random_limit, g_dictionary[random_word]);
                 g_clients.push_back(c);
                 break;
             }

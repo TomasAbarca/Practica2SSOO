@@ -28,7 +28,7 @@ void PaySystem::operator()(){
             std::cerr << "Error reloading the pay..." << std::endl;
         }
 
-        std::cout << "PAY SYSTEM ACTIVATED" << std::endl;
-        std::cout << "The payment reload for client " << c.get_id_client() << " has been done" << std::endl;
+        std::cout << "***** PAY SYSTEM ACTIVATED *****" << std::endl;
+        std::cout << "THE PAYMENT RELOAD FOR CLIENT " << c.get_id_client() << " HAS BEEN DONE" << std::endl;
     }
 }

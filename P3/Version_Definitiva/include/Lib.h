@@ -1,7 +1,6 @@
 #define CLIENTS 10
 #define CONCURRENT_CLIENTS 4
-#define LIMIT_WORDS 10
-#define CREDITS 20
+#define LIMIT 20 // Variable that can be used as credits and limit of words
 #define FILE_WORD "Words.txt"
 
 #define COLOR_RED     "\x1b[31m"

@@ -76,7 +76,7 @@ void Client::file_for_results(MediatorySearch ms){
         
         std::ofstream file(address.c_str());
 
-        title = "----- RESULTS IN THE TEXT SEARCHING THE WORD " + get_word_to_search() + " IN THE BOOK------------\n";
+        title = "***** RESULT OF SEARCHING " + get_word_to_search() + " IN THE BOOK *****\n";
         file << title;
 
         while(ms.pq_vector[i].empty() == false){
@@ -112,7 +112,7 @@ void Client::file_for_time_results(double time){
 
     std::ofstream file(address.c_str());
 
-    title = "The client " + std::to_string(id_client) + " has spend a time of " + std::to_string(time) + " seconds\n";
+    title = "THE CLIENT " + std::to_string(id_client) + " HAS SPEND " + std::to_string(time) + " SECONDS\n";
     file << title;
     file.close();
 }
@@ -122,7 +122,7 @@ int Client::operator()(int n){
     double time;
     const int id = id_client;
 
-    std::cout << "Client " << id_client << " created" << std::endl;
+    std::cout << "***** CLIENT " << id_client << " STARTS TO USE SSOOIIGLE *****" << std::endl;
     
     toString();
 
@@ -148,17 +148,17 @@ int Client::operator()(int n){
 
     file_for_results(ms);
 
-    std::cout << "The client " << id_client << " has the results on his directory" << std::endl;
+    std::cout << "***** CLIENT " << id_client << " HAS THE RESULTS ON HIS DIRECTORY *****" << std::endl;
 
     return EXIT_SUCCESS;
 }
 
 void Client::toString(){
     if(category == "Free Account"){
-        std::cout << "Client " << id_client << " with a Free Account created. It can search " << limit << " words" << std::endl; 
+        std::cout << "CLIENT " << id_client << " WITH A FREE ACCOUNT HAS BEEN CREATED" << std::endl; 
     }else if(category == "Premium Limit"){
-        std::cout << "Client " << id_client << " with a Premium Limit Account created. It has " << credit << " credits" << std::endl;
+        std::cout << "CLIENT " << id_client << " WITH A PREMIUM LIMIT ACCOUNT HAS BEEN CREATED. HE STARTS WITH " << credit << " CREDITS" << std::endl;
     }else{
-        std::cout << "Client " << id_client << " with a Premium Limitless Account created" << std::endl;
+        std::cout << "CLIENT " << id_client << " WITH A PREMIUM LIMITLESS ACCOUNT HAS BEEN CREATED" << std::endl;
     }
 }
