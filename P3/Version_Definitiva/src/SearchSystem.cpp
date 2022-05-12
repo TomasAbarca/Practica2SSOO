@@ -1,16 +1,20 @@
 #include "SearchSystem.h"
 
 
-int search(SearchRequest sr, Client client, std::string book, int limit, std::priority_queue<LineResult, std::vector<LineResult>, OrderQueue> &pq_pointer)
+int SearchSystem::search(SearchRequest sr, Client client, std::string book, int limit, std::priority_queue<LineResult, std::vector<LineResult>, OrderQueue> &pq_pointer)
 {
     std::priority_queue<LineResult, std::vector<LineResult>,OrderQueue> new_pq;
 	int limit_aux = limit;
+	int i;
 	std::vector<std::string> arrayLine;
-	arrayLine = readFile(book);
-	if(arrayLine.size() != 0)							/* If the arrayLine size is bigger than 0, then delete the las line of the file */
-		arrayLine.erase(arrayLine.end());					/* Delete the last line of the file */
 
-	for(int i = 0; i < arrayLine.size(); i++){					/* Do the search in every .txt */
+	arrayLine = readFile(book);
+
+	if(arrayLine.size() != 0){			   /* If the arrayLine size is bigger than 0, then delete the last line of the file */
+		arrayLine.erase(arrayLine.end());  /* Delete the last line of the file */
+	}					
+
+	for(i = 0; i < arrayLine.size(); i++){					/* Do the search in every .txt */
 			new_pq = searchTheWord(divideLineInWords(arrayLine[i]), sr.get_word_to_search(), i, 1, 0, arrayLine.size(), new_pq);
 	}
 	
@@ -19,11 +23,11 @@ int search(SearchRequest sr, Client client, std::string book, int limit, std::pr
 		LineResult search = new_pq.top();
 		new_pq.pop();								/* Delete the top of the new priority queue */
 		pq_pointer.push(search);
-		if(limit_aux == 0 && client.get_category() == "FREE"){			/* If a FREE client has limit = 0... */
+		if(limit_aux == 0 && client.get_category() == "Free Account"){			/* If a FREE client has limit = 0... */
 			std::cout << COLOR_GREEN << "\n------------------------------------ SEARCH SYSTEM -----------------------------------" << std::endl;
 			std::cout << COLOR_GREEN << "FREE client with id " << client.get_id_client() << " without searchs." << std::endl;
 			std::cout << COLOR_GREEN << "--------------------------------------------------------------------------------------" << std::endl;
-		}else if(limit_aux == 0 && client.get_category()  == "PRIME"){		/* If a PRIME client has limit = 0... */
+		}else if(limit_aux == 0 && client.get_category()  == "Premium Limit"){		/* If a PRIME client has limit = 0... */
 			std::cout << COLOR_GREEN << "\n------------------------------------ SEARCH SYSTEM -----------------------------------" << std::endl;
 			std::cout << COLOR_GREEN << "PRIME client with id " << client.get_id_client() << " without balance." << std::endl;
 			std::cout << COLOR_GREEN << "--------------------------------------------------------------------------------------" << std::endl;
@@ -39,11 +43,14 @@ int search(SearchRequest sr, Client client, std::string book, int limit, std::pr
 	return limit_aux;
 }
 
-Client get_client(int id_client)
+Client SearchSystem::get_client(int id_client)
 {
     bool find = false;
+	int i;
+
 	Client c(0,"","");
-	for(int i = 0; i < g_clients.size() && !find; i++){
+
+	for(i = 0; i < g_clients.size() && !find; i++){
 		if(g_clients[i].get_id_client() == id_client){
 			Client c = g_clients[i];
 			find = true;
@@ -53,18 +60,22 @@ Client get_client(int id_client)
 	return c;
 }
 
-SearchRequest get_search_request()
+SearchRequest SearchSystem::get_search_request()
 {
     int position = 0;
+	int random_num;
+
 	srand(time(NULL));
+
 	SearchRequest search_request(-1,"",-1);
+
 	if(g_searchRequest_vector.same_priority() == true){
 		SearchRequest sr = g_searchRequest_vector.front();
 		search_request = sr;
 		g_searchRequest_vector.pop();
 	}else{
-		int random_number = 1 + rand()%(11-1);
-		if(random_number <= 8){
+		random_num = 1 + rand()%(11-1);
+		if(random_num <= 8){
 			position = g_searchRequest_vector.get_pos_premium_request();
 			SearchRequest sr = g_searchRequest_vector.get_request_by_pos(position);
 			search_request = sr;
@@ -79,35 +90,39 @@ SearchRequest get_search_request()
 	return search_request;
 }
 
-void search_on_book(SearchRequest sr)
+void SearchSystem::search_on_book(SearchRequest sr)
 {
     Client client = get_client(sr.get_id_client());
 	int limit = client.get_limit();
+	int i;
 				
 	std::this_thread::sleep_for(std::chrono::milliseconds(1000));	/* Delay of 1 second to pause the program */
-	for(int i = 0; i < g_books.size(); i++){
-		limit = search(sr, client, g_books[i], limit,std::ref(pq_vector[i]));
+	
+	for(i = 0; i < g_books.size(); i++){
+		limit = search(sr, client, g_books[i], limit, std::ref(pq_vector[i]));
 	}
 }
 
-void fill_pq_vector()
+void SearchSystem::fill_pq_vector()
 {
+	int i;
     std::priority_queue<LineResult, std::vector<LineResult>,OrderQueue> pq;
-	for(int i = 0; i < g_books_num; i++){
+	
+	for(i = 0; i < g_books_num; i++){
 			pq_vector.push_back(pq);
 	}
 }
 
-void operator()()
+void SearchSystem::operator()()
 {
     while(1){
 		/* Fill the vector of priority queues */
 		fill_pq_vector();
 			
-		std::unique_lock<std::mutex> lk_queue(g_sem_searchSystem);
+		std::unique_lock<std::mutex> ul(g_sem_searchSystem);
 		/* The SearchSystem will be blocked if the queue of the search request is empty */
-		g_wait_searchSystem.wait(lk_queue, [] {return (g_searchRequest_vector.get_v_request().size() != 0);});	
-		lk_queue.unlock();
+		g_wait_searchSystem.wait(ul, [] {return (g_searchRequest_vector.get_v_request().size() != 0);});	
+		ul.unlock();
 		/* Get the front SearchRequest of the vector */
 		g_sem_searchRequest.lock();
 		SearchRequest search_request = get_search_request();

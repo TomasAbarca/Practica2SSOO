@@ -1,4 +1,3 @@
-#include <dirent.h>
 #include "Client.h"
 
 //Free Account
@@ -122,11 +121,15 @@ int Client::operator()(int n){
     unsigned tI, tF;
     double time;
     const int id = id_client;
+
     std::cout << "Client " << id_client << " created" << std::endl;
+    
     toString();
 
     tI = clock();
+
     SearchRequest sr = do_search();
+    
     g_searchRequest_vector.insert(sr);
 
     g_wait_searchSystem.notify_one();

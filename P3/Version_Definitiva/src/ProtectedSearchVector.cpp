@@ -1,5 +1,7 @@
 #include "ProtectedSearchVector.h"
 
+ProtectedSearchVector::ProtectedSearchVector(){}
+
 std::vector<SearchRequest> ProtectedSearchVector::get_v_request(){
     return v_request;
 }

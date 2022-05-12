@@ -8,7 +8,7 @@
 #include "OrderQueue.h"
 #include "SearchLibrary.h"
 
-std::vector <std::string> readFile (std::string file)
+std::vector<std::string> readFile (std::string file)
 {
     std::vector<std::string> v_line;
     std::ifstream m_file;
@@ -61,7 +61,7 @@ std::priority_queue<LineResult, std::vector<LineResult>, OrderQueue> searchTheWo
 			if(i == 0 && v_string.size()>1){		/* If the found word is the first word of the line and the line has more than one word... */
 				text = v_string[i] + " " + v_string[i+1] + " ...";
 			}
-			else if(v_string.size() ==1)		/* If there is only a word in the line... */
+			else if(v_string.size() == 1)		/* If there is only a word in the line... */
 				text = v_string[i] + " ...";
 			else if(i+1==v_string.size())		/* If the found word is the last word of the line... */
 				text = v_string[i-1] + " " + v_string[i] + " ...";

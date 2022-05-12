@@ -1,6 +1,8 @@
 #include "ProtectedMediatoryVector.h"
 
-std::vector <MediatorySearch> ProtectedMediatoryVector::get_mandatory_search_vector(){
+ProtectedMediatoryVector::ProtectedMediatoryVector(){}
+
+std::vector<MediatorySearch> ProtectedMediatoryVector::get_mandatory_search_vector(){
     return m_search_vector;
 }
 

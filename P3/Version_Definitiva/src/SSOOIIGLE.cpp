@@ -18,21 +18,17 @@
 #include "Lib.h"
 #include "SearchRequest.cpp"
 #include "ProtectedSearchVector.cpp"
+ProtectedSearchVector g_searchRequest_vector;
 #include "PaymentReload.cpp"
+std::queue<PaymentReload> g_paymentReload_queue; //Queue where the requests of reloads are store
 #include "SearchLibrary.cpp"
 #include "MediatorySearch.cpp"
 #include "ProtectedMediatoryVector.cpp"
+ProtectedMediatoryVector g_mediatory_vector;
 #include "Client.cpp"
+std::vector<Client> g_clients;
 #include "SearchSystem.cpp"
 #include "PaySystem.cpp"
-
-ProtectedSearchVector g_searchRequest_vector;
-
-ProtectedMediatoryVector g_mediatory_vector;
-
-std::queue<PaymentReload> g_paymentReload_queue; //Queue where the requests of reloads are store
-
-std::vector<Client> g_clients;
 
 void createClients();
 
@@ -42,10 +38,23 @@ void createClientThreads();
 
 void searchSystemThreads();
 
+void control_of_errors();
+
+void install_signal_handler();
+
+void signal_handler(int sig);
+
 bool complete_dictionary();
+
+bool does_file_exists();
 
 int main(){
     PaySystem pS;
+
+    install_signal_handler();
+
+    control_of_errors();
+    
 
     std::thread create_clients(createClients);
     create_clients.detach();
@@ -93,7 +102,7 @@ void createClients(){
                 break;
             }
         }
-        std::this_thread::sleep_for(std::chrono::milliseconds(300));
+        std::this_thread::sleep_for(std::chrono::milliseconds(500));
     }
 }
 
@@ -113,7 +122,7 @@ void createClientThreads(){
     for(i=0; i<g_clients.size(); i++){
         thread_client[i] = std::thread(g_clients[i], i);
         thread_client[i].detach();
-        std::this_thread::sleep_for(std::chrono::milliseconds(300));
+        std::this_thread::sleep_for(std::chrono::milliseconds(500));
     }
 }
 
@@ -156,4 +165,39 @@ bool does_file_exists(){
     else{
         return !exist;
     }
+}
+
+void control_of_errors(){
+    bool is_empty;
+
+    if(!does_file_exists()){
+        std::cerr << "The file " << FILE_WORD << " does not exist" << std::endl;
+        exit(-1);
+    }
+
+    is_empty = complete_dictionary();
+
+    if(is_empty == true && g_books.size() == 0){
+        std::cerr << "The file " << FILE_WORD << " is empty" << std::endl;
+        exit(-1);
+    }
+    if(is_empty == true){
+        std::cerr << "The file " << FILE_WORD << " is empty" << std::endl;
+        exit(-1);
+    }
+    else if(g_books.size() == 0){
+        std::cerr << "The books array is empty" << std::endl;
+        exit(-1);
+    }
+}
+
+void install_signal_handler(){
+    if(signal(SIGINT, signal_handler) == SIG_ERR){
+        std::cerr << "Error at the instalation of the signal handler" << std::endl;
+    }
+}
+
+void signal_handler(int sig){
+    std::cout << "Signal CTRL + C received" << std::endl;
+    exit(-1);
 }
