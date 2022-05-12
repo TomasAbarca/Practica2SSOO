@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <sstream>
 #include <fstream>
-//#include "Csearch.h"
+#include "LineResult.h"
 #include "ThreadResult.h"
-//#include "compareFunction.h"
+#include "OrderQueue.h"
 #include "SearchLibrary.h"
 std::vector <std::string> readFile (std::string file)
 {
@@ -42,7 +42,7 @@ std::string toUpperCase(std::string s)
 	return s;
 }
 
-priority_queue<Csearch>, compareFunction> searchTheWord(std::vector<std::string> v_string, std::string word_to_search, int id_line, int id_thread, int LimitMin, int LimitMax, prority_queue<Csearch, vector<Csearch>, compareFunction> pq)
+std::priority_queue<LineResult, std::vector<LineResult>, OrderQueue> searchTheWord(std::vector<std::string> v_string, std::string word_to_search, int id_line, int id_thread, int LimitMin, int LimitMax, std::priority_queue<LineResult, std::vector<LineResult>, OrderQueue> pq)
 {
     std::string text;
 	word_to_search = convertString(word_to_search);
@@ -57,8 +57,8 @@ priority_queue<Csearch>, compareFunction> searchTheWord(std::vector<std::string>
 				text = v_string[i-1] + " " + v_string[i] + " ...";
 			else 						
 				text = v_string[i-1] + " " + v_string[i] + " " + v_string[i+1] + " ...";
-			CThread cthread(1, 0, LimitMax);	
-			CSearch search(id_line+1, text, i, cthread);
+			ThreadResult cthread(1, 0, LimitMax);	
+			LineResult search(id_line+1, text, i, cthread);
 			pq.push(search);
 		}
 	}
