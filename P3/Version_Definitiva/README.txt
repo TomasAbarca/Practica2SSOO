@@ -63,6 +63,9 @@ Lib.h - Es un archivo de cabecera donde se encuentran las diferentes variables d
 COMO EJECUTAR LA PRÁCTICA EN NUESTRA MÁQUINA
 --------------------------------------------
 
+Primero, destacar que la práctica lee en todos los libros que le indiquemos en "Lib.h". No obstante,
+para hacer pruebas solo hemos utilizado 4 de ellos.
+
 Con el fin de facilitar la ejecución del proyecto, hemos creado un archivo Makefile, con el que,
 a través de comandos muy sencillos, podremos compilar, ejecutar y borrar directorios de nuestra práctica.
 
