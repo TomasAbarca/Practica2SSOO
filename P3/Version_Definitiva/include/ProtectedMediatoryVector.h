@@ -1,5 +1,13 @@
-/* In this class, we are going to create a vector of mediatory search.
-*  It has the methods to manage the vector protected by a semaphore */
+/*
+
+Project: Práctica 3 de SSOO II - SSOOIIGLE II
+Class Name: ProtectedMediatoryVector.h
+Authors: Aarón Peces García, Tomás Abarca Cerro, Fernando González García
+Date: 13/05/2022
+Purpose: In this class, we are going to create a vector of mediatory search.
+         It has the methods to manage the vector protected by a semaphore.
+         
+*/
 
 #ifndef PROTECTEDMEDIATORYVECTOR_H
 #define PROTECTEDMEDIATORYVECTOR_H

@@ -1,3 +1,13 @@
+/*
+
+Project: Práctica 3 de SSOO II - SSOOIIGLE II
+Class Name: Lib.h
+Authors: Aarón Peces García, Tomás Abarca Cerro, Fernando González García
+Date: 13/05/2022
+Purpose: Here we implement some variables to simplify our main class
+         
+*/
+
 #define CLIENTS 10
 #define CONCURRENT_CLIENTS 4
 #define LIMIT 50 // Variable that can be used as credits and limit of words
@@ -16,7 +26,7 @@ std::condition_variable g_wait_searchSystem;
 std::condition_variable g_wait_client;
 
 std::vector<std::string> g_dictionary = {};
-std::vector<std::string> g_books = {"17-LEYES-DEL-TRABJO-EN-EQUIPO.txt", "21-LEYES-DEL-LIDERAZGO.txt"};
+std::vector<std::string> g_books = {"17-LEYES-DEL-TRABJO-EN-EQUIPO.txt", "21-LEYES-DEL-LIDERAZGO.txt", "25-MANERAS-DE-GANARSE-A-LA-GENTE.txt", "ACTITUD-DE-VENDEDOR.txt"};
 
 std::atomic<int> g_id_request (0);
 

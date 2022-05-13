@@ -1,8 +1,16 @@
-/* In this class, we will store al the information about the three types
-*  of clients. We implement a operator that every client execute. 
-*  The clients make a request and then,they get blocked until we get the result
-*  from the search system with a reply.
-*  After all this, we create a file with the results */
+/*
+
+Project: Práctica 3 de SSOO II - SSOOIIGLE II
+Class Name: Client.h
+Authors: Aarón Peces García, Tomás Abarca Cerro, Fernando González García
+Date: 13/05/2022
+Purpose: In this class, we will store al the information about the three types
+         of clients. We implement a operator that every client execute. 
+         The clients make a request and then,they get blocked until we get the result
+         from the search system with a reply.
+         After all this, we create a file with the results
+         
+*/
 
 #ifndef CLIENT_H
 #define CLIENT_H

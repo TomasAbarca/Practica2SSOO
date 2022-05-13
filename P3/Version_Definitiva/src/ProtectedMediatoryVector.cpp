@@ -1,3 +1,13 @@
+/*
+
+Project: Práctica 3 de SSOO II - SSOOIIGLE II
+Class Name: ProtectedMediatoryVector.cpp
+Authors: Aarón Peces García, Tomás Abarca Cerro, Fernando González García
+Date: 13/05/2022
+Purpose: Class that implements her .h
+         
+*/
+
 #include "ProtectedMediatoryVector.h"
 
 ProtectedMediatoryVector::ProtectedMediatoryVector(){}

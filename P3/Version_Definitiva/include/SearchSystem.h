@@ -1,5 +1,14 @@
-/* This class represents the search system of the program. The instances of this class
-*  will be blocked until we have a search request */
+/*
+
+Project: Práctica 3 de SSOO II - SSOOIIGLE II
+Class Name: SearchSystem.h
+Authors: Aarón Peces García, Tomás Abarca Cerro, Fernando González García
+Date: 13/05/2022
+Purpose: This class represents the search system of the program. The instances of this class
+         will be blocked until we have a search request
+         
+*/
+
 
 #ifndef SEARCHSYSTEM_H
 #define SEARCHSYSTEM_H

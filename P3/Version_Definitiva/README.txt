@@ -1,17 +1,27 @@
-SSOOIIGLE.cpp - Es el .cpp principal de la práctica. Aquí es donde hemos tomado las primeras decisiones de diseño.
+En este documento vamos a comentar el funcionamiento de todas las clases, así como muchas decisiones de diseño que
+hemos tomado y hemos tenido que implementar.
 
-+Cada cliente que creamos es un hilo (hay tantos clientes como la variable definida en "Lib.h", CLIENTS nos indica).
-+Por otro lado, también creamos buscadores. Cada buscador será un hilo, y habrá tantos como N réplicas pueden ejecutarse, 
-y según el enunciado son 4. Esto lo controlamos con otra variable en "Lib.h", CONCURRENT_CLIENTS.
-+Aquí también creamos el sistema de pago, mediante un único hilo.
+Terminaremos con una breve demostración de lo que tendríamos que poner en la consola para ejecutar nuestra
+práctica.
+
+-----------------------------
+FUNCIONAMIENTO DE LA PRÁCTICA
+-----------------------------
+
+SSOOIIGLE.cpp - Es el .cpp principal de la práctica. Aquí es donde hemos tomado las primeras decisiones de diseño.
+                Cada cliente que creamos es un hilo (hay tantos clientes como la variable definida en "Lib.h", 
+                CLIENTS nos indica). Por otro lado, también creamos buscadores. Cada buscador será un hilo, 
+                y habrá tantos como N réplicas pueden ejecutarse, y según el enunciado son 4. 
+                Esto lo controlamos con otra variable en "Lib.h", CONCURRENT_CLIENTS. 
+                Aquí también creamos el sistema de pago, mediante un único hilo.
 
 Client.cpp - Esta clase será la que almacene todos los datos propios de un cliente, así como tendrá implementados
-             los métodos que sean necesarios para controlar el funcionamiento correcto del sistema.
-
-El funcionamiento de esta clase consistirá en que los clientes realizarán una petición consistente en una búsqueda
-a través de los libros. Tras hacer esta petición, quedarán bloqueados hasta que consigamos los resultados oportunos.
-Los resultados, tanto de tiempo como de coincidencias, aparecerán en el directorio de cada cliente situado en la carpeta
-creada en tiempo de ejecución "Clients". Aparecerán en formato txt.
+             los métodos que sean necesarios para controlar el funcionamiento correcto del sistema. 
+             El funcionamiento de esta clase consistirá en que los clientes realizarán una petición que consiste 
+             en una búsqueda a través de los libros. Tras hacer esta petición, quedarán bloqueados 
+             hasta que consigamos los resultados oportunos. Los resultados, tanto de tiempo como de coincidencias, 
+             aparecerán en el directorio de cada cliente situado en la carpeta creada en tiempo de ejecución "Clients". 
+             Aparecerán en formato txt.
 
 SearchRequest.cpp - Aquí almacenaremos la información sobre la petición que haga el cliente. Según hemos simplificado con
                     el enunciado, sus atributos serán el id del cliente, la palabra que desea buscar y la prioridad 
@@ -48,4 +58,17 @@ OrderQueue.cpp - Esta clase simplemente ordena las instancias de la cola.
 
 Lib.h - Es un archivo de cabecera donde se encuentran las diferentes variables definidas que nos ayudan a no tener
         líneas de código en el main innecesarias.
-                    
+
+--------------------------------------------
+COMO EJECUTAR LA PRÁCTICA EN NUESTRA MÁQUINA
+--------------------------------------------
+
+Con el fin de facilitar la ejecución del proyecto, hemos creado un archivo Makefile, con el que,
+a través de comandos muy sencillos, podremos compilar, ejecutar y borrar directorios de nuestra práctica.
+
+1.- Nos situamos en el directorio donde tengamos descargado nuestro proyecto.
+2.- Escribimos "make all". Con esto compilaremos los archivos necesarios para la ejecución.
+3.- Escribimos "make execute". Tras esto, se iniciará la ejecución de nuestra práctica.
+4.- Para terminar el programa (podremos hacerlo en cualquier momento), pulsamos la combinación de teclas "CTRL + C".
+5.- Una vez finalizada la ejecución, si deseamos volver a ejecutar lo más apropiado es escribir "make clean", que
+    se encargará de borrar carpetas y archivos innecesarios.

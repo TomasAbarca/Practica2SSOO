@@ -1,4 +1,13 @@
-//In this class we will manage the information about the search request that the client makes
+/*
+
+Project: Práctica 3 de SSOO II - SSOOIIGLE II
+Class Name: SearchRequest.h
+Authors: Aarón Peces García, Tomás Abarca Cerro, Fernando González García
+Date: 13/05/2022
+Purpose: In this class we will manage the information about the search request that the client makes
+         
+*/
+
 
 #ifndef SEARCHREQUEST_H
 #define SEARCHREQUEST_H

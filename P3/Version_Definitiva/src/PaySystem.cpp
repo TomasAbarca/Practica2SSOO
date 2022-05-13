@@ -1,3 +1,13 @@
+/*
+
+Project: Práctica 3 de SSOO II - SSOOIIGLE II
+Class Name: PaySystem.cpp
+Authors: Aarón Peces García, Tomás Abarca Cerro, Fernando González García
+Date: 13/05/2022
+Purpose: Class that implements her .h
+         
+*/
+
 #include "PaySystem.h"
 
 Client PaySystem::get_client(int id_client){

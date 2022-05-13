@@ -1,3 +1,13 @@
+/*
+
+Project: Práctica 3 de SSOO II - SSOOIIGLE II
+Class Name: SearchRequest.cpp
+Authors: Aarón Peces García, Tomás Abarca Cerro, Fernando González García
+Date: 13/05/2022
+Purpose: Class that implements her .h
+         
+*/
+
 #include "SearchRequest.h"
 
 SearchRequest::SearchRequest(int id_client, std::string word_to_search, int priority){

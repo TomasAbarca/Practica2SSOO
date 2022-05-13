@@ -201,7 +201,7 @@ void install_signal_handler(){
 }
 
 void signal_handler(int sig){
-    std::cout << COLOR_RESET << "INTERRUPTION: SIGNAL (CTRL + C) RECEIVED" << std::endl;
+    std::cout << COLOR_RESET << "\nINTERRUPTION: SIGNAL (CTRL + C) RECEIVED" << std::endl;
     std::terminate();
     std::exit(EXIT_FAILURE);
 }

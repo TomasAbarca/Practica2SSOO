@@ -1,4 +1,12 @@
-// This .h will create some methods that help us with the results in the searching
+/*
+
+Project: Práctica 3 de SSOO II - SSOOIIGLE II
+Class Name: SearchLibrary.h
+Authors: Aarón Peces García, Tomás Abarca Cerro, Fernando González García
+Date: 13/05/2022
+Purpose: This .h will create some methods that help us with the results in the searching
+         
+*/
 
 #include <stdio.h>
 #include <string>

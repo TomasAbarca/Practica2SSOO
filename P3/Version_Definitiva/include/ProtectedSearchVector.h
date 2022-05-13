@@ -1,4 +1,12 @@
-// In this class we are going to protect a vector of request with a mutex
+/*
+
+Project: Práctica 3 de SSOO II - SSOOIIGLE II
+Class Name: ProtectedSearchVector.h
+Authors: Aarón Peces García, Tomás Abarca Cerro, Fernando González García
+Date: 13/05/2022
+Purpose: In this class we are going to protect a vector of request with a mutex
+         
+*/
 
 #ifndef PROTECTEDSEARCHVECTOR_H
 #define PROTECTEDSEARCHVECTOR_H
