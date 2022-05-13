@@ -195,10 +195,12 @@ void control_of_errors(){
 void install_signal_handler(){
     if(signal(SIGINT, signal_handler) == SIG_ERR){
         std::cerr << "Error at the instalation of the signal handler" << std::endl;
+        exit(EXIT_FAILURE);
     }
 }
 
 void signal_handler(int sig){
-    std::cout << "Signal CTRL + C received" << std::endl;
-    exit(-1);
+    std::cout << "INTERRUPTION: SIGNAL (CTRL + C) RECEIVED" << std::endl;
+    std::terminate();
+    std::exit(EXIT_FAILURE);
 }

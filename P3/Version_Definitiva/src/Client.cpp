@@ -14,6 +14,7 @@ Client::Client(int id_client, std::string category, int credit, std::string word
     this -> word_to_search = word_to_search;
     this -> category = category;
     this -> credit = credit;
+    this -> limit = credit;
 }
 
 //Prime Limitless Account
@@ -21,6 +22,7 @@ Client::Client(int id_client, std::string category, std::string word_to_search){
     this -> id_client = id_client;
     this -> word_to_search = word_to_search;
     this -> category = category;
+    this -> limit = -1;
 }
 
 int Client::get_id_client(){
@@ -97,7 +99,6 @@ bool Client::existDirectory(std::string dir_name){
     }
 
     return false;
-
 }
 
 void Client::file_for_time_results(double time){

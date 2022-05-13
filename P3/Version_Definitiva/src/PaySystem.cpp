@@ -18,8 +18,11 @@ Client PaySystem::get_client(int id_client){
 void PaySystem::operator()(){
     while(1){
         std::this_thread::sleep_for(std::chrono::milliseconds(500));
+        
         std::unique_lock<std::mutex> ul(g_sem_paySystem);
+        
         g_wait_paySystem.wait(ul, [] {return (g_paymentReload_queue.empty() == false);});
+        
         Client c = get_client(g_paymentReload_queue.front().id_client);
 
         try{

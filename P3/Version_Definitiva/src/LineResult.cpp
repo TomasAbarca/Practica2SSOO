@@ -8,19 +8,19 @@
 #define COLOR_CYAN    "\x1b[36m"
 
 int LineResult::get_n_line(){
-    return n_line;
+    return this->n_line;
 }
 
 std::string LineResult::get_word(){
-    return word;
+    return this->word;
 }
 
 int LineResult::get_pos_in_line(){
-    return pos_in_line;
+    return this->pos_in_line;
 }
 
 ThreadResult LineResult::get_tr(){
-    return tr;
+    return this->tr;
 }
 
 /* Here, we show the information of the results. 

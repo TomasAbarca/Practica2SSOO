@@ -23,6 +23,7 @@ int SearchSystem::search(SearchRequest sr, Client client, std::string book, int 
 		LineResult search = new_pq.top();
 		new_pq.pop();								/* Delete the top of the new priority queue */
 		pq_pointer.push(search);
+
 		if(limit_aux == 0 && client.get_category() == "Free Account"){			/* If a FREE client has limit = 0... */
 			std::cout << COLOR_GREEN << "\n***** SEARCH SYSTEM *****" << std::endl;
 			std::cout << COLOR_GREEN << "FREE CLIENT " << client.get_id_client() << " WITHOUT SEARCHS" << std::endl;
@@ -31,12 +32,19 @@ int SearchSystem::search(SearchRequest sr, Client client, std::string book, int 
 			std::cout << COLOR_GREEN << "\n***** SEARCH SYSTEM *****" << std::endl;
 			std::cout << COLOR_GREEN << "PREMIUM WITH LIMIT CLIENT " << client.get_id_client() << " WITHOUT CREDITS" << std::endl;
 			std::cout << COLOR_GREEN << "--------------------------------------------------------------------------------------" << std::endl;
+			
 			PaymentReload pr(client.get_id_client());				/* Create a PaymentReload */
-			std::lock_guard<std::mutex> lk(g_sem_paymentRequest);
+			
+			std::lock_guard<std::mutex> lg(g_sem_paymentRequest);
+			
 			g_paymentReload_queue.push(std::move(pr));			/* Push it to the payment_queue */
+			
 			g_wait_paySystem.notify_one();					/* Notify one PaySystem */
+			
 			limit_aux = g_paymentReload_queue.front().client_future.get();	/* Get the new limit for the client */
+			
 			g_paymentReload_queue.pop();
+			
 			g_wait_paySystem.notify_all();					
 		}
 	}
@@ -96,7 +104,7 @@ void SearchSystem::search_on_book(SearchRequest sr)
 	int limit = client.get_limit();
 	int i;
 				
-	std::this_thread::sleep_for(std::chrono::milliseconds(1000));	/* Delay of 1 second to pause the program */
+	std::this_thread::sleep_for(std::chrono::seconds(1));	/* Delay of 1 second to pause the program */
 	
 	for(i = 0; i < g_books.size(); i++){
 		limit = search(sr, client, g_books[i], limit, std::ref(pq_vector[i]));
@@ -120,16 +128,20 @@ void SearchSystem::operator()()
 		fill_pq_vector();
 			
 		std::unique_lock<std::mutex> ul(g_sem_searchSystem);
+
 		/* The SearchSystem will be blocked if the queue of the search request is empty */
 		g_wait_searchSystem.wait(ul, [] {return (g_searchRequest_vector.get_v_request().size() != 0);});	
 		ul.unlock();
+		
 		/* Get the front SearchRequest of the vector */
 		g_sem_searchRequest.lock();
 		SearchRequest search_request = get_search_request();
 		g_sem_searchRequest.unlock();
+		
 		std::cout << COLOR_GREEN << "\n***** SEARCH SYSTEM *****" << std::endl;
 		std::cout << COLOR_GREEN "SEARCHING THE WORD " << search_request.get_word_to_search() << " IN ALL BOOKS FOR CLIENT " << search_request.get_id_client() << std::endl;
 		std::cout << COLOR_GREEN << "--------------------------------------------------------------------------------------" << std::endl;
+		
 		search_on_book(search_request);
 				
 		std::cout << COLOR_GREEN << "\n***** SEARCH SYSTEM *****" << std::endl;
@@ -139,8 +151,10 @@ void SearchSystem::operator()()
 		/* When the SearchRequest has been completed, a ReplySearch is created and inserted in the reply_search_vector */
 		MediatorySearch mediatory_search(search_request.get_id_client(), pq_vector);
 		g_mediatory_vector.insert(mediatory_search);
+		
 		/* Notify all wait_user condition variable to unlock the user */
 		g_wait_client.notify_all();
+		
 		/* Notify one wait_search condition variable to unlock other SearchSystem */
 		g_wait_searchSystem.notify_one();
 	}	
