@@ -49,6 +49,7 @@ bool complete_dictionary();
 bool does_file_exists();
 
 int main(){
+    std::cout<<"\n"<<"WELCOME TO "<<COLOR_BLUE<<"SS"<<COLOR_RED<<"O"<<COLOR_YELLOW<<"O"<<COLOR_BLUE<<"II"<<COLOR_GREEN<<"GL"<<COLOR_RED<<"E"<<COLOR_RESET<<"\n"<<std::endl;
     PaySystem pS;
 
     install_signal_handler();
