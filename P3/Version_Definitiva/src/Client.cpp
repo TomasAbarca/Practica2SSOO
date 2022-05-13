@@ -123,7 +123,7 @@ int Client::operator()(int n){
     double time;
     const int id = id_client;
 
-    std::cout << "***** CLIENT " << id_client << " STARTS TO USE SSOOIIGLE *****" << std::endl;
+    std::cout << COLOR_GREEN << "***** CLIENT " << id_client << " STARTS TO USE SSOOIIGLE *****" << std::endl;
     
     toString();
 
@@ -149,17 +149,17 @@ int Client::operator()(int n){
 
     file_for_results(ms);
 
-    std::cout << "***** CLIENT " << id_client << " HAS THE RESULTS ON HIS DIRECTORY *****" << std::endl;
+    std::cout << COLOR_GREEN << "***** CLIENT " << id_client << " HAS THE RESULTS ON HIS DIRECTORY *****" << std::endl;
 
     return EXIT_SUCCESS;
 }
 
 void Client::toString(){
     if(category == "Free Account"){
-        std::cout << "CLIENT " << id_client << " WITH A FREE ACCOUNT HAS BEEN CREATED" << std::endl; 
+        std::cout << COLOR_GREEN << "CLIENT " << id_client << " WITH A FREE ACCOUNT HAS BEEN CREATED" << std::endl; 
     }else if(category == "Premium Limit"){
-        std::cout << "CLIENT " << id_client << " WITH A PREMIUM LIMIT ACCOUNT HAS BEEN CREATED. HE STARTS WITH " << credit << " CREDITS" << std::endl;
+        std::cout << COLOR_GREEN << "CLIENT " << id_client << " WITH A PREMIUM LIMIT ACCOUNT HAS BEEN CREATED. HE STARTS WITH " << credit << " CREDITS" << std::endl;
     }else{
-        std::cout << "CLIENT " << id_client << " WITH A PREMIUM LIMITLESS ACCOUNT HAS BEEN CREATED" << std::endl;
+        std::cout << COLOR_GREEN << "CLIENT " << id_client << " WITH A PREMIUM LIMITLESS ACCOUNT HAS BEEN CREATED" << std::endl;
     }
 }

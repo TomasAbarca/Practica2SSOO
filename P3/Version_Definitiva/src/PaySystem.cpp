@@ -28,10 +28,10 @@ void PaySystem::operator()(){
         try{
             g_paymentReload_queue.front().client_promise.set_value(c.get_credit());   
         }catch(std::exception e){
-            std::cerr << "Error reloading the pay..." << std::endl;
+            std::cerr << COLOR_RED << "Error reloading the pay..." << std::endl;
         }
 
-        std::cout << "***** PAY SYSTEM ACTIVATED *****" << std::endl;
-        std::cout << "THE PAYMENT RELOAD FOR CLIENT " << c.get_id_client() << " HAS BEEN DONE" << std::endl;
+        std::cout << COLOR_CYAN << "***** PAY SYSTEM ACTIVATED *****" << std::endl;
+        std::cout << COLOR_CYAN << "THE PAYMENT RELOAD FOR CLIENT " << c.get_id_client() << " HAS BEEN DONE" << std::endl;
     }
 }

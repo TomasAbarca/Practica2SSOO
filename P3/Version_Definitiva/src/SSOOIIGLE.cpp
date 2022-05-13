@@ -172,35 +172,35 @@ void control_of_errors(){
     bool is_empty;
 
     if(!does_file_exists()){
-        std::cerr << "The file " << FILE_WORD << " does not exist" << std::endl;
+        std::cerr << COLOR_RED << "The file " << FILE_WORD << " does not exist" << std::endl;
         exit(-1);
     }
 
     is_empty = complete_dictionary();
 
     if(is_empty == true && g_books.size() == 0){
-        std::cerr << "The file " << FILE_WORD << " is empty" << std::endl;
+        std::cerr << COLOR_RED << "The file " << FILE_WORD << " is empty" << std::endl;
         exit(-1);
     }
     if(is_empty == true){
-        std::cerr << "The file " << FILE_WORD << " is empty" << std::endl;
+        std::cerr << COLOR_RED << "The file " << FILE_WORD << " is empty" << std::endl;
         exit(-1);
     }
     else if(g_books.size() == 0){
-        std::cerr << "The books array is empty" << std::endl;
+        std::cerr << COLOR_RED << "The books array is empty" << std::endl;
         exit(-1);
     }
 }
 
 void install_signal_handler(){
     if(signal(SIGINT, signal_handler) == SIG_ERR){
-        std::cerr << "Error at the instalation of the signal handler" << std::endl;
+        std::cerr << COLOR_RED << "Error at the instalation of the signal handler" << std::endl;
         exit(EXIT_FAILURE);
     }
 }
 
 void signal_handler(int sig){
-    std::cout << "INTERRUPTION: SIGNAL (CTRL + C) RECEIVED" << std::endl;
+    std::cout << COLOR_RESET << "INTERRUPTION: SIGNAL (CTRL + C) RECEIVED" << std::endl;
     std::terminate();
     std::exit(EXIT_FAILURE);
 }

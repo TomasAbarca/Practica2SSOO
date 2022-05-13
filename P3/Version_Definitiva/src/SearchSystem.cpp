@@ -25,13 +25,13 @@ int SearchSystem::search(SearchRequest sr, Client client, std::string book, int 
 		pq_pointer.push(search);
 
 		if(limit_aux == 0 && client.get_category() == "Free Account"){			/* If a FREE client has limit = 0... */
-			std::cout << COLOR_GREEN << "\n***** SEARCH SYSTEM *****" << std::endl;
-			std::cout << COLOR_GREEN << "FREE CLIENT " << client.get_id_client() << " WITHOUT SEARCHS" << std::endl;
-			std::cout << COLOR_GREEN << "--------------------------------------------------------------------------------------" << std::endl;
+			std::cout << COLOR_YELLOW << "\n***** SEARCH SYSTEM *****" << std::endl;
+			std::cout << COLOR_YELLOW << "FREE CLIENT " << client.get_id_client() << " WITHOUT SEARCHS" << std::endl;
+			std::cout << COLOR_YELLOW << "--------------------------------------------------------------------------------------" << std::endl;
 		}else if(limit_aux == 0 && client.get_category()  == "Premium Limit"){		/* If a PRIME client has limit = 0... */
-			std::cout << COLOR_GREEN << "\n***** SEARCH SYSTEM *****" << std::endl;
-			std::cout << COLOR_GREEN << "PREMIUM WITH LIMIT CLIENT " << client.get_id_client() << " WITHOUT CREDITS" << std::endl;
-			std::cout << COLOR_GREEN << "--------------------------------------------------------------------------------------" << std::endl;
+			std::cout << COLOR_YELLOW << "\n***** SEARCH SYSTEM *****" << std::endl;
+			std::cout << COLOR_YELLOW << "PREMIUM WITH LIMIT CLIENT " << client.get_id_client() << " WITHOUT CREDITS" << std::endl;
+			std::cout << COLOR_YELLOW << "--------------------------------------------------------------------------------------" << std::endl;
 			
 			PaymentReload pr(client.get_id_client());				/* Create a PaymentReload */
 			
@@ -138,15 +138,15 @@ void SearchSystem::operator()()
 		SearchRequest search_request = get_search_request();
 		g_sem_searchRequest.unlock();
 		
-		std::cout << COLOR_GREEN << "\n***** SEARCH SYSTEM *****" << std::endl;
-		std::cout << COLOR_GREEN "SEARCHING THE WORD " << search_request.get_word_to_search() << " IN ALL BOOKS FOR CLIENT " << search_request.get_id_client() << std::endl;
-		std::cout << COLOR_GREEN << "--------------------------------------------------------------------------------------" << std::endl;
+		std::cout << COLOR_YELLOW << "\n***** SEARCH SYSTEM *****" << std::endl;
+		std::cout << COLOR_YELLOW "SEARCHING THE WORD " << search_request.get_word_to_search() << " IN ALL BOOKS FOR CLIENT " << search_request.get_id_client() << std::endl;
+		std::cout << COLOR_YELLOW << "--------------------------------------------------------------------------------------" << std::endl;
 		
 		search_on_book(search_request);
 				
-		std::cout << COLOR_GREEN << "\n***** SEARCH SYSTEM *****" << std::endl;
-		std::cout << COLOR_GREEN <<"THE REQUEST OF THE CLIENT " << search_request.get_id_client() << " HAS BEEN COMPLETED, THE RESULTS WILL BE IN HIS DIRECTORY." << std::endl;
-		std::cout << COLOR_GREEN << "--------------------------------------------------------------------------------------" << std::endl;
+		std::cout << COLOR_YELLOW << "\n***** SEARCH SYSTEM *****" << std::endl;
+		std::cout << COLOR_YELLOW <<"THE REQUEST OF THE CLIENT " << search_request.get_id_client() << " HAS BEEN COMPLETED, THE RESULTS WILL BE IN HIS DIRECTORY." << std::endl;
+		std::cout << COLOR_YELLOW << "--------------------------------------------------------------------------------------" << std::endl;
 					
 		/* When the SearchRequest has been completed, a ReplySearch is created and inserted in the reply_search_vector */
 		MediatorySearch mediatory_search(search_request.get_id_client(), pq_vector);
